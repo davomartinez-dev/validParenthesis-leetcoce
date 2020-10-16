@@ -1,6 +1,6 @@
 # Valid Parenthesis :rocket:
 
-This is my solution for the challenge validh parenthesis leet code.
+This is my solution for the coding challenge valid parentheses from leetcode.
 
 ## Built With
 
