@@ -66,6 +66,8 @@ class LinkedList
   end
 
   def get(index)
+    return nil unless @head
+
     current = @head
     index.times do
       current = current.next_node
@@ -84,27 +86,55 @@ class Stack
   end
 
   def pop
-    raise 'Stack is empty' unless @stack
+    return nil unless @stack
 
     temp = @stack.get(0)
     @stack.remove(0)
     temp
   end
+
+  def get
+    return nil unless @stack
+
+    temp = @stack.get(0)
+  end
 end
 
-stack = Stack.new
-stack.push(3)
-stack.push(5)
-puts stack.pop
-# => 5
+def is_valid(str)
+  # create a stack
+  # loop over the strig
+  # check if char is an open brack add it to stack
+  # check if char is closing brack and match the type of the brack we should pop to stack
+  # if the char is different ignore it
 
-stack.push(2)
-stack.push(7)
-puts stack.pop
-# => 7
+  # check if stack is empty if it is the string is balanced
+  open_bra = '([{'
+  stack = Stack.new
+  str.each_char do |ele|
+    if open_bra.include?(ele)
+      stack.push(ele)
+    else
+      return false if stack.get.nil?
 
-puts stack.pop
-# => 2
+      res = stack.get
+      if res === '(' && ele === ')'
+        stack.pop
+      elsif res === '[' && ele === ']'
+        stack.pop
+      elsif res === '{' && ele === '}'
+        stack.pop
+      else
+        return false
+      end
+    end
+  end
 
-puts stack.pop
-# => 3
+  return true if stack.get.nil?
+
+  false
+end
+
+puts is_valid('()[]{}')   # true
+puts is_valid('(]')       # false
+puts is_valid('([)]')     # false
+puts is_valid(']')        # false
